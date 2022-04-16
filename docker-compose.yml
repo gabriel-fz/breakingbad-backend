@@ -1,0 +1,12 @@
+version: "3.1"
+
+services:
+  breakingbad_db:
+    image: postgres
+    container_name: breakingbad
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: docker
+      POSTGRES_DB: breakingbad
+    ports:
+      - 5432:5432
