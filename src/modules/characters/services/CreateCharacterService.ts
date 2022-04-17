@@ -22,7 +22,7 @@ class CreateCharacterService {
 
   public async execute({ name }: IRequest): Promise<Character> {
     if (await this.charactersRepository.findByName(name)) {
-      throw new AppError('Email address already used.');
+      throw new AppError('Name already used.');
     }
 
     const character = await this.charactersRepository.create({

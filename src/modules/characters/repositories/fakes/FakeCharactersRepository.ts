@@ -27,6 +27,13 @@ class FakeCharactersRepository implements ICharactersRepository {
     return character;
   }
 
+  public async findById(id: string): Promise<Character | undefined> {
+    const character = this.characters.find(
+      characterStored => characterStored.id === id,
+    );
+    return character;
+  }
+
   public async findByName(name: string): Promise<Character | undefined> {
     const character = this.characters.find(
       characterStored => characterStored.name === name,
