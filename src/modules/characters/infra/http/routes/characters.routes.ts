@@ -16,4 +16,15 @@ appointmentsRouter.post(
   charactersController.create,
 );
 
+appointmentsRouter.put(
+  '/',
+  celebrate({
+    [Segments.BODY]: {
+      character_id: Joi.string().required(),
+      new_name: Joi.string().required(),
+    },
+  }),
+  charactersController.update,
+);
+
 export default appointmentsRouter;

@@ -23,7 +23,7 @@ describe('CreateCharacter', () => {
     expect(character).toHaveProperty('id');
   });
 
-  it('should not create a user with an name already taken', async () => {
+  it('should not create a character with an name already taken', async () => {
     await createCharacterService.execute({
       name: 'Walter White',
     });
