@@ -1,9 +1,8 @@
 import { Router } from 'express';
+import charactersRouter from '@modules/characters/infra/http/routes/characters.routes';
 
 const routes = Router();
 
-routes.get('/', (request, response) => {
-  return response.json({ message: 'Hello World Opa' });
-});
+routes.use('/character', charactersRouter);
 
 export default routes;
