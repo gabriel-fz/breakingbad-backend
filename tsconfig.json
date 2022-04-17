@@ -9,7 +9,10 @@
     "strict": true,
     "skipLibCheck": true,
     "strictPropertyInitialization": false,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
     "baseUrl": "./src",
+    "allowJs": true,
     "paths": {
       "@modules/*": [
         "modules/*"
