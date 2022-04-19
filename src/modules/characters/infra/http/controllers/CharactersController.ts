@@ -4,6 +4,7 @@ import { container } from 'tsyringe';
 import { classToClass } from 'class-transformer';
 
 import CreateCharacterService from '@modules/characters/services/CreateCharacterService';
+import ListCharacterService from '@modules/characters/services/ListCharacterService';
 import UpdateCharacterService from '@modules/characters/services/UpdateCharacterService';
 import RemoveCharacterService from '@modules/characters/services/RemoveCharacterService';
 
@@ -14,6 +15,21 @@ class CharactersController {
     const createCharacter = container.resolve(CreateCharacterService);
 
     const character = await createCharacter.execute({ name });
+
+    return response.status(200).json(classToClass(character));
+  }
+
+  public async list(request: Request, response: Response): Promise<Response> {
+    const { name, order, offset, limit } = request.query;
+
+    const listCharacterService = container.resolve(ListCharacterService);
+
+    const character = await listCharacterService.execute({
+      name: name?.toString() || '',
+      order: order === 'ASC' ? 'ASC' : 'DESC',
+      limit: Number(limit) || 10,
+      offset: Number(offset) || 1,
+    });
 
     return response.status(200).json(classToClass(character));
   }

@@ -3,6 +3,7 @@ import Character from '@modules/characters/infra/typeorm/entities/Character';
 
 import ICharactersRepository from '@modules/characters/repositories/ICharactersRepository';
 import ICreateCharacterDTO from '@modules/characters/dtos/ICreateCharacterDTO';
+import IFilterCharactersDTO from '@modules/characters/dtos/IFilterCharactersDTO';
 
 class FakeCharactersRepository implements ICharactersRepository {
   private characters: Character[] = [];
@@ -50,6 +51,10 @@ class FakeCharactersRepository implements ICharactersRepository {
     );
 
     return character;
+  }
+
+  public async findByFilter(_: IFilterCharactersDTO): Promise<Character[]> {
+    throw new Error('Method not implemented.');
   }
 }
 
