@@ -14,13 +14,15 @@ class CharactersRepository implements ICharactersRepository {
   public async create({ name }: ICreateCharacterDTO): Promise<Character> {
     const character = this.ormRepository.create({ name });
 
-    await this.ormRepository.save(character);
-
-    return character;
+    return this.ormRepository.save(character);
   }
 
   public async save(character: Character): Promise<Character> {
     return this.ormRepository.save(character);
+  }
+
+  public async remove(character: Character): Promise<Character> {
+    return this.ormRepository.softRemove(character);
   }
 
   public async findById(id: string): Promise<Character | undefined> {

@@ -6,7 +6,7 @@ import UpdateCharacterService from '@modules/characters/services/UpdateCharacter
 let fakeCharactersRepository: FakeCharactersRepository;
 let updateCharacterService: UpdateCharacterService;
 
-describe('CreateCharacter', () => {
+describe('UpdateCharacter', () => {
   beforeEach(() => {
     fakeCharactersRepository = new FakeCharactersRepository();
 

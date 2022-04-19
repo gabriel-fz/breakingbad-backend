@@ -27,6 +27,16 @@ class FakeCharactersRepository implements ICharactersRepository {
     return character;
   }
 
+  public async remove(character: Character): Promise<Character> {
+    const findIndex = this.characters.findIndex(
+      findCharacter => findCharacter.id === character.id,
+    );
+
+    this.characters[findIndex].deleted_at = new Date();
+
+    return this.characters[findIndex];
+  }
+
   public async findById(id: string): Promise<Character | undefined> {
     const character = this.characters.find(
       characterStored => characterStored.id === id,

@@ -6,4 +6,5 @@ export default interface ICharactersRepository {
   findByName(name: string): Promise<Character | undefined>;
   create(data: ICreateCharacterDTO): Promise<Character>;
   save(character: Character): Promise<Character>;
+  remove(character: Character): Promise<Character>;
 }

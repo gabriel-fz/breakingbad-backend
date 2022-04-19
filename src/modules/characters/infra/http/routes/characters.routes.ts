@@ -27,4 +27,6 @@ appointmentsRouter.put(
   charactersController.update,
 );
 
+appointmentsRouter.delete('/:id', charactersController.remove);
+
 export default appointmentsRouter;
