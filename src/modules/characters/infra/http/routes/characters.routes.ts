@@ -16,6 +16,8 @@ appointmentsRouter.post(
   charactersController.create,
 );
 
+appointmentsRouter.get('/', charactersController.list);
+
 appointmentsRouter.put(
   '/',
   celebrate({

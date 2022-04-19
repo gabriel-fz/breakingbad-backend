@@ -1,8 +1,9 @@
-import { getRepository, Repository } from 'typeorm';
+import { getRepository, Repository, Like } from 'typeorm';
 import Character from '@modules/characters/infra/typeorm/entities/Character';
 
 import ICharactersRepository from '@modules/characters/repositories/ICharactersRepository';
 import ICreateCharacterDTO from '@modules/characters/dtos/ICreateCharacterDTO';
+import IFilterCharactersDTO from '@modules/characters/dtos/IFilterCharactersDTO';
 
 class CharactersRepository implements ICharactersRepository {
   private ormRepository: Repository<Character>;
@@ -33,6 +34,24 @@ class CharactersRepository implements ICharactersRepository {
 
   public async findByName(name: string): Promise<Character | undefined> {
     const character = await this.ormRepository.findOne({ where: { name } });
+
+    return character;
+  }
+
+  public async findByFilter({
+    name,
+    order,
+    limit,
+    offset,
+  }: IFilterCharactersDTO): Promise<Character[]> {
+    const character = await this.ormRepository.find({
+      where: { name: Like(`${name}%`) },
+      order: {
+        name: order,
+      },
+      take: limit,
+      skip: (offset - 1) * limit,
+    });
 
     return character;
   }
