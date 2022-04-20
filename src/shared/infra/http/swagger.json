@@ -1,0 +1,163 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "BreakingBad Documentation",
+    "version": "1.0.0",
+    "contact": "gabrielfzancanela@gmail.com"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3333",
+      "description": "API CINCO - homologação"
+    }
+  ],
+  "paths": {
+    "/character": {
+      "post": {
+        "summary": "Create a character",
+        "description": "Create a new character",
+        "tags": [
+          "Characters"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "required": true,
+                    "description": "Character name"
+                  }
+                },
+                "example": {
+                  "name": "Walter White"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "401": {
+            "description": "Name already used."
+          },
+          "400": {
+            "description": "Internal server error"
+          },
+          "200": {
+            "description": "Ok"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update a character",
+        "description": "Update a character",
+        "tags": [
+          "Characters"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "character_id": {
+                    "type": "string",
+                    "required": true,
+                    "description": "Character Id"
+                  },
+                  "new_name": {
+                    "type": "string",
+                    "required": true,
+                    "description": "Character name"
+                  }
+                },
+                "example": {
+                  "name": "Walter White"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "401": {
+            "description": "Name already used."
+          },
+          "400": {
+            "description": "Internal server error"
+          },
+          "200": {
+            "description": "Ok"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Remove a character",
+        "description": "Remove a character",
+        "tags": [
+          "Characters"
+        ],
+        "parameters":[
+          {
+            "name":"id",
+            "in":"path",
+            "description":"Character's Id",
+            "type":"string"
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Internal server error"
+          },
+          "200": {
+            "description": "Ok"
+          }
+        }
+      }
+    },
+    "/character?name={name}&order={order}&limit={limit}&offset={offset}": {
+      "get": {
+        "summary": "List characters",
+        "description": "List characters",
+        "tags": [
+          "Characters"
+        ],
+        "parameters":[
+          {
+            "name":"name",
+            "in":"path",
+            "required":false,
+            "type":"string"
+          },
+          {
+            "name":"order",
+            "in":"path",
+            "type": "enum",
+            "enum": ["ASC", "DESC"]
+          },
+          {
+            "name":"limit",
+            "in":"path",
+            "type":"integer",
+            "minimum": 1
+          },
+          {
+            "name":"offset",
+            "in":"path",
+            "type":"integer",
+            "minimum": 1
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Internal server error"
+          },
+          "200": {
+            "description": "Ok"
+          }
+        }
+      }
+    }
+  }
+}

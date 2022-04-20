@@ -4,9 +4,11 @@ import 'express-async-errors';
 import express, { Request, Response, NextFunction } from 'express';
 import cors from 'cors';
 import { errors } from 'celebrate';
+import swaggerUi from 'swagger-ui-express';
 
 import AppError from '@shared/errors/AppError';
 import routes from './routes';
+import swaggerFile from './swagger.json';
 
 import '@shared/infra/typeorm';
 import '@shared/container';
@@ -15,6 +17,9 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerFile));
+
 app.use(routes);
 
 app.use(errors());
